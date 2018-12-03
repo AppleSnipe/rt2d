@@ -5,11 +5,16 @@
  *
  */
 
+#include <iostream>
 #include "basicentity.h"
 
 BasicEntity::BasicEntity() : Entity()
 {
-	
+	std::cout << "Constructor BasicEntity" << std::endl;
+	this->addSprite("assets/square.tga");
+	this->x = 42;
+	this->y = 42;
+	this->falling = false;
 }
 
 
@@ -20,18 +25,9 @@ BasicEntity::~BasicEntity()
 
 void BasicEntity::update(float deltaTime)
 {
-
+	this->totalwidth = this->scale.x * this->sprite()->width();
+	this->totalheight = this->scale.y * this->sprite()->height();
+	this->x = this->position.x - (totalwidth / 2);
+	this->y = this->position.y - (totalheight / 2);
 }
 
-bool BasicEntity::CubePlayer(BasicEntity A, BasicEntity B) {
-	if (
-		A.position.x + A.scale.x >= B.position.x &&
-		B.position.x + B.scale.x >= A.position.x &&
-		A.position.y + A.scale.y >= A.position.y &&
-		B.position.y + B.scale.y >= B.position.y) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}

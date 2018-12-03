@@ -13,24 +13,25 @@
 
 Game::Game() : Scene()
 {
-	// start the timer.
-	t.start();
 
 	// create a single instance of MyEntity in the middle of the screen.
 	// the Sprite is added in Constructor of MyEntity.
 	
-	cube = new BasicEntity();
-	cube->addSprite("assets/square.tga");
-	cube->position = Point2(10, 10);
-	cube->scale = Point(30, 30);
-
+	
 	background = new BasicEntity();
 	background->position = Point2(20, 20);
 	background->scale = Point(100.0f, 100.0f);
 	background->sprite()->color = WHITE;
 
+	floor = new BasicEntity();
+	floor->addSprite("assets/square.tga");
+	floor->sprite()->color = BLACK;
+	floor->position = Point2(120, 300);
+	floor->scale = Point(2.0f, 1.0f);
+
 	playerone = new PlayerOne();
-	playerone->position = Point2(20, 20);
+	playerone->sprite()->color = BLUE;
+	playerone->position = Point2(80, 80);
 	playerone->scale = Point(0.2f, 0.2f);
 
 	playertwo = new PlayerTwo();
@@ -39,8 +40,8 @@ Game::Game() : Scene()
 
 	// create the scene 'tree'
 	// add myentity to this Scene as a child.
-	this->addChild(cube);
 	this->addChild(background);
+	this->addChild(floor);
 	this->addChild(playerone);
 	this->addChild(playertwo);
 	
@@ -49,14 +50,14 @@ Game::Game() : Scene()
 Game::~Game()
 {
 	// deconstruct and delete the Tree
-	this->removeChild(cube);
 	this->removeChild(background);
+	this->removeChild(floor);
 	this->removeChild(playerone);
 	this->removeChild(playertwo);
 
 	// delete myentity from the heap (there was a 'new' in the constructor)
-	delete cube;
 	delete background;
+	delete floor;
 	delete playerone;
 	delete playertwo;
 }
@@ -71,16 +72,44 @@ void Game::update(float deltaTime)
 	}
 
 	// ###############################################################
-	// Rotate color
+	// Check for collision
 	// ###############################################################
-	if (t.seconds() > 0.0333f) {
-		RGBAColor color = playerone->sprite()->color;
-		playerone->sprite()->color = Color::rotate(color, 0.01f);
-		playertwo->sprite()->color = Color::rotate(color, 0.01f);
-		t.start();
+	if (AABB(this->playerone, this->floor)) {
+		this->playerone->falling = false;
+	}
+	else {
+		this->playerone->falling = true;
+	}
+
+	if (AABB(this->playertwo, this->floor)) {
+		this->playertwo->falling = false;
+	}
+	else {
+		this->playertwo->falling = true;
+	}
+
+	updateGravity(this->playerone);
+	updateGravity(this->playertwo);
+}
+
+bool Game::AABB(BasicEntity* A, BasicEntity* B) {
+	if (
+		A->x + A->totalwidth >= B->x &&
+		B->x + B->totalwidth >= A->x &&
+		A->y + A->totalheight >= B->y &&
+		B->y + B->totalheight >= A->y) {
+		return true;
+	}
+	else {
+		return false;
 	}
 }
 
+void Game::updateGravity(BasicEntity* A) {
+	if (A->falling == true) {
+		A->position.y++;
+	}
+}
 /*
 std::vector<std::vector<int> > MyArray;
 

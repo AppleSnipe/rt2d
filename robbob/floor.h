@@ -5,19 +5,17 @@
  *
  */
 
-#ifndef COLLIDER_H
-#define COLLIDER_H
+#ifndef FLOOR_H
+#define FLOOR_H
 
-#include <rt2d/entity.h>
 #include "basicentity.h"
 
-class Collider : public Entity
+class Floor : public BasicEntity
 {
 public:
-	static bool CubePlayer(BasicEntity A, BasicEntity B);
 
-	Collider();
-	virtual ~Collider();
+	Floor();
+	virtual ~Floor();
 
 	virtual void update(float deltaTime);
 

@@ -8,10 +8,10 @@
 #ifndef PLAYERTWO_H
 #define PLAYERTWO_H
 
-#include <rt2d/entity.h>
+#include "basicentity.h"
 
 /// @brief The MyEntity class is the Entity implementation.
-class PlayerTwo : public Entity
+class PlayerTwo : public BasicEntity
 {
 public:
 	/// @brief Constructor
@@ -26,9 +26,7 @@ public:
 
 private:
 	/* add your private declarations */
-	bool updateGravity();
-
-
+	
 };
 
 #endif /* MYENTITY_H */

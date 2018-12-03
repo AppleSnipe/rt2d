@@ -13,7 +13,13 @@
 class BasicEntity : public Entity
 {
 public:
-	static bool CubePlayer(BasicEntity A, BasicEntity B);
+
+	int x;
+	int y;
+	int totalwidth;
+	int totalheight;
+
+	bool falling;
 
 	BasicEntity();
 	virtual ~BasicEntity();

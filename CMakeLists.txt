@@ -175,8 +175,8 @@ IF(MAKE_ROBBOB)
 		robbob/basicentity.h
 		robbob/game.cpp
 		robbob/game.h
-    robbob/collider.cpp
-    robbob/collider.h
+    robbob/floor.cpp
+    robbob/floor.h
     robbob/playerone.cpp
     robbob/playerone.h
     robbob/playertwo.cpp

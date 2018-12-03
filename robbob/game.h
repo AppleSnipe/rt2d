@@ -17,12 +17,12 @@
 #include "playerone.h"
 #include "playertwo.h"
 #include "basicentity.h"
-#include "collider.h"
 
 /// @brief The MyScene class is the Scene implementation.
 class Game : public Scene
 {
 public:
+	
 	/// @brief Constructor
 	Game();
 	/// @brief Destructor
@@ -32,15 +32,16 @@ public:
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
+	static bool AABB(BasicEntity* A, BasicEntity* B);
+	static void updateGravity(BasicEntity* A);
 
 private:
 	/// @brief the rotating square in the middle of the screen
-	BasicEntity* cube;
+	BasicEntity* floor;
 	BasicEntity* background;
 	PlayerOne* playerone;
 	PlayerTwo* playertwo;
 	/// @brief a Timer to rotate the color every n seconds
-	Timer t;
 };
 
 #endif /* SCENE00_H */

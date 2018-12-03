@@ -6,13 +6,12 @@
  */
 
 #include "playertwo.h"
-#include "collider.h"
+#include "game.h"
 
-PlayerTwo::PlayerTwo() : Entity()
+PlayerTwo::PlayerTwo() : BasicEntity()
 {
 	this->addSprite("assets/square.tga");
 	this->sprite()->color = RED;
-	bool falling = false;
 }
 
 PlayerTwo::~PlayerTwo()
@@ -23,34 +22,26 @@ PlayerTwo::~PlayerTwo()
 void PlayerTwo::update(float deltaTime)
 {
 	// ###############################################################
+	// ALWAYS Put the entity update in an entity.
+	// ###############################################################
+	BasicEntity::update(deltaTime);
+
+	// ###############################################################
 	// Falling & Movement
 	// ###############################################################
 
-	if
-	if (!PlayerTwo::updateGravity()) {
-		this->position.y++;
-	}
-	else {
-		if (input()->getKey(Left)) {
-			this->position.x -= 3;
-		}
-		if (input()->getKey(Right)) {
-			this->position.x += 3;
-		}
 
-		if (input()->getKeyDown(Up)) {
-			this->position.y;
+		if(!this->falling) {
+			if (input()->getKey(Left)) {
+				this->position.x -= 3;
+			}
+			if (input()->getKey(Right)) {
+				this->position.x += 3;
+			}
+			if (input()->getKeyDown(Up)) {
+				this->position.y -= 30;
+			}
 		}
-	}
-}
-
-bool PlayerTwo::updateGravity() {
-	if (this->position.y >= 600) {
-		return true;
-	}
-	else {
-		return false;
-	}
 }
 
 

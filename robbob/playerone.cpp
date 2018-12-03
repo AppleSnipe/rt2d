@@ -7,13 +7,12 @@
 
 
 #include "playerone.h"
-#include "collider.h"
+#include "game.h"
 
-PlayerOne::PlayerOne() : Entity()
+PlayerOne::PlayerOne() : BasicEntity()
 {
 	this->addSprite("assets/square.tga");
 	this->sprite()->color = RED;
-	bool falling = false;
 }
 
 PlayerOne::~PlayerOne()
@@ -24,36 +23,25 @@ PlayerOne::~PlayerOne()
 void PlayerOne::update(float deltaTime)
 {
 	// ###############################################################
+	// ALWAYS Put the entity update in an entity.
+	// ###############################################################
+	BasicEntity::update(deltaTime);
+	
+	// ###############################################################
 	// Falling & Movement
 	// ###############################################################
 
-	if (!CubePlayer()) {
 
-		if (!PlayerOne::updateGravity()) {
-			this->position.y++;
-		}
-		else {
+		if (!this->falling) {
 			if (input()->getKey(A)) {
 				this->position.x -= 3;
 			}
 			if (input()->getKey(D)) {
 				this->position.x += 3;
 			}
-
 			if (input()->getKeyDown(W)) {
-				this->position.y;
+				this->position.y -= 30;
 			}
 		}
-	}
-}
-
-bool PlayerOne::updateGravity() {
-	if (this->position.y >= 300) {
-		return true;
-	}
-	else {
-		return false;
-	}
-
 	
 }

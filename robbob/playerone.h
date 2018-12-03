@@ -27,9 +27,6 @@ public:
 
 private:
 	/* add your private declarations */
-	bool updateGravity();
-
-
 };
 
 #endif /* MYENTITY_H */
