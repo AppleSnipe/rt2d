@@ -9,12 +9,13 @@
 #define PLAYERONE_H
 
 #include "basicentity.h"
+#include <functional>
 
 /// @brief The MyEntity class is the Entity implementation.
 class PlayerOne : public BasicEntity
 {
 public:
-
+	void setPointCollision(std::function<bool(Vector2 pos)> value) { pointcollision = value; }
 	/// @brief Constructor
 	PlayerOne();
 	/// @brief Destructor
@@ -26,7 +27,10 @@ public:
 	virtual void update(float deltaTime);
 
 private:
-	/* add your private declarations */
+	std::function<bool(Vector2 pos)> pointcollision = nullptr;
+	bool leftdown;
+	bool rightdown;
+	bool updown;
 };
 
-#endif /* MYENTITY_H */
+#endif

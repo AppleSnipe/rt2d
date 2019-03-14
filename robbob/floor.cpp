@@ -20,9 +20,9 @@ Floor::~Floor()
 
 void Floor::update(float deltaTime)
 {
-	// ###############################################################
-	// ALWAYS Put the entity update in an entity.
-	// ###############################################################
+	/*------------------------------------------------------------------
+				ALWAYS Put the entity update in an entity.
+	------------------------------------------------------------------*/
 	BasicEntity::update(deltaTime);
 }
 

@@ -5,37 +5,27 @@
  *
  */
 
-#ifndef BASICENTITY_H
-#define BASICENTITY_H
+#ifndef STATICENTITY_H
+#define STATICENTITY_H
 
 #include <rt2d/entity.h>
 
-class BasicEntity : public Entity
+class StaticEntity : public Entity
 {
 public:
 
 	int totalwidth;
 	int totalheight;
 
-	Vector2 velocity;
-	Vector2 acceleration;
-
-	int maxJump;
-	int maxSpeed;
-
 	int sign(float i);
 
-	bool grounded;
-
-	BasicEntity();
-	virtual ~BasicEntity();
+	StaticEntity();
+	virtual ~StaticEntity();
 
 	virtual void update(float deltaTime);
 
 private:
 	/* add your private declarations */
-	float gravity;
-	float maxgravity;
 };
 
 #endif /* BASICENTITY_H */

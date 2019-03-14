@@ -5,8 +5,8 @@
  *
  */
 
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAMESCENE_H
+#define GAMESCENE_H
 
 #include <glm/glm.hpp>
 #include <rt2d/scene.h>
@@ -17,28 +17,35 @@
 #include "playerone.h"
 #include "playertwo.h"
 #include "basicentity.h"
+#include "staticentity.h"
 
 /// @brief The MyScene class is the Scene implementation.
-class Game : public Scene
+class GameScene : public Scene
 {
 public:
 	
 	/// @brief Constructor
-	Game();
+	GameScene();
 	/// @brief Destructor
-	virtual ~Game();
+	virtual ~GameScene();
 
 	/// @brief update is automatically called every frame
 	/// @param deltaTime the elapsed time in seconds
 	/// @return void
 	virtual void update(float deltaTime);
-	static bool AABB(BasicEntity* A, BasicEntity* B);
+	static bool AABB(BasicEntity* A, StaticEntity* B);
+	bool PointCollision(Vector2 pos);
 	static void updateGravity(BasicEntity* A);
 
 private:
 	/// @brief the rotating square in the middle of the screen
-	BasicEntity* floor;
-	BasicEntity* background;
+	std::vector <StaticEntity*> collidables;
+	StaticEntity* wall1;
+	StaticEntity* wall2;
+	StaticEntity* floor1;
+	StaticEntity* floor2;
+	StaticEntity* floor3;
+	StaticEntity* background;
 	PlayerOne* playerone;
 	PlayerTwo* playertwo;
 	/// @brief a Timer to rotate the color every n seconds
